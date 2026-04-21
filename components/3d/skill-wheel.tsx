@@ -9,68 +9,102 @@ import { Card, CardContent } from "@/components/ui/card"
 
 const skillsData = [
   {
-    name: "React",
-    category: "Frontend",
-    level: 95,
-    color: "#61DAFB",
-    position: [3, 0, 0],
-    description: "Advanced React development with hooks, context, and performance optimization",
-  },
-  {
-    name: "Node.js",
-    category: "Backend",
-    level: 90,
-    color: "#339933",
-    position: [2.1, 2.1, 0],
-    description: "Server-side JavaScript with Express, APIs, and microservices architecture",
-  },
-  {
-    name: "TypeScript",
-    category: "Frontend",
-    level: 88,
-    color: "#3178C6",
-    position: [0, 3, 0],
-    description: "Type-safe JavaScript development with advanced TypeScript patterns",
-  },
-  {
     name: "Python",
-    category: "AI/ML",
-    level: 85,
+    category: "Languages",
     color: "#3776AB",
-    position: [-2.1, 2.1, 0],
-    description: "Machine learning, data analysis, and backend development with Python",
+    position: [5.2, 0, 0],
+    description: "Automation, data analysis, backend scripting, and machine learning workflows.",
+  },
+  {
+    name: "Java",
+    category: "Languages",
+    color: "#f89820",
+    position: [3.68, 3.68, 0],
+    description: "Object-oriented programming, backend logic, and software engineering projects.",
+  },
+  {
+    name: "JavaScript",
+    category: "Languages",
+    color: "#F7DF1E",
+    position: [0, 3.2, 0],
+    description: "Dynamic web development across frontend and full-stack applications.",
+  },
+  {
+    name: "SQL",
+    category: "Languages",
+    color: "#d271f2",
+    position: [-3.68, 3.68, 0],
+    description: "Database querying, structured data handling, and backend data workflows.",
   },
   {
     name: "AWS",
-    category: "Cloud",
-    level: 82,
-    color: "#FF9900",
-    position: [-3, 0, 0],
-    description: "Cloud infrastructure, serverless computing, and DevOps on AWS",
+    category: "Cloud & DevOps",
+    color: "#fab856",
+    position: [-5.2, 0, 0],
+    description: "EC2, S3, RDS, Lambda, IAM, VPC, and CloudWatch for cloud systems.",
   },
   {
     name: "Docker",
-    category: "DevOps",
-    level: 80,
+    category: "Cloud & DevOps",
     color: "#2496ED",
-    position: [-2.1, -2.1, 0],
-    description: "Containerization, orchestration, and deployment automation",
+    position: [-3.68, -2.68, 0],
+    description: "Containerization and deployment of modern applications.",
   },
   {
-    name: "Three.js",
-    category: "Frontend",
-    level: 75,
-    color: "#000000",
-    position: [0, -3, 0],
-    description: "3D graphics, WebGL, and immersive web experiences",
+    name: "Linux",
+    category: "Cloud & DevOps",
+    color: "#ffd044",
+    position: [0, -5.2, 0],
+    description: "Command-line operations, scripting, and environment management.",
   },
   {
-    name: "GraphQL",
-    category: "Backend",
-    level: 78,
-    color: "#E10098",
-    position: [2.1, -2.1, 0],
-    description: "API design, schema definition, and efficient data fetching",
+    name: "Jenkins",
+    category: "Cloud & DevOps",
+    color: "#fc32c9",
+    position: [3.68, -2.68, 0],
+    description: "CI/CD pipelines and automated build, test, and integration workflows.",
+  },
+  {
+    name: "React",
+    category: "Web Dev",
+    color: "#61DAFB",
+    position: [2.6, 0, 2.2],
+    description: "Component-based frontend development for interactive web applications.",
+  },
+  {
+    name: "TypeScript",
+    category: "Web Dev",
+    color: "#1c85f6",
+    position: [1.3, 2.25, 2.2],
+    description: "Type-safe frontend and backend development with cleaner maintainable code.",
+  },
+  {
+    name: "Flask",
+    category: "Web Dev",
+    color: "#9affff",
+    position: [-1.3, 2.25, 2.2],
+    description: "Python backend services and API development.",
+  },
+  {
+    name: "REST APIs",
+    category: "Web Dev",
+    color: "#00C7B7",
+    position: [-2.6, 0, 2.2],
+    description: "Design and implementation of scalable API endpoints and integrations.",
+  },
+  {
+    name: "Git & GitHub",
+    category: "Tools",
+    color: "#F05032",
+    position: [-1.3, -1.25, 2.2],
+    description: "Version control, branching, pull requests, and collaborative development.",
+  },
+  {
+    name: "Postman",
+    category: "Tools",
+    color: "#ffb237",
+    position: [1.3, -1.25, 2.2],
+    description: "API testing, request debugging, and workflow validation.",
   },
 ]
 
@@ -88,7 +122,8 @@ function SkillOrb({ skill, onClick, isHovered }: any) {
     }
   })
 
-  const size = (skill.level / 100) * 0.6 + 0.2
+  // const size = (skill.level / 100) * 0.6 + 0.2
+  const size = 0.5
 
   return (
     <group position={skill.position}>
@@ -118,7 +153,7 @@ function SkillOrb({ skill, onClick, isHovered }: any) {
       </Text>
 
       <Text position={[0, -size - 0.6, 0]} fontSize={0.12} color="#888" anchorX="center" anchorY="middle">
-        {skill.level}%
+        {skill.level}
       </Text>
     </group>
   )

@@ -43,7 +43,7 @@ export default function LiveGitHubWidget() {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
+        {/* <div className="grid grid-cols-2 gap-4">
           <motion.div whileHover={{ scale: 1.05 }} className="text-center p-3 rounded-lg bg-white/5">
             <div className="text-2xl font-bold text-green-400">{githubData.commits}</div>
             <div className="text-sm text-white/60">Total Commits</div>
@@ -53,7 +53,7 @@ export default function LiveGitHubWidget() {
             <div className="text-2xl font-bold text-yellow-400">{githubData.stars}</div>
             <div className="text-sm text-white/60">Stars Earned</div>
           </motion.div>
-        </div>
+        </div> */}
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -68,9 +68,9 @@ export default function LiveGitHubWidget() {
         <div className="space-y-2">
           <div className="text-sm text-white/60">Recent Activity:</div>
           <div className="space-y-1">
-            <div className="text-sm text-white/80">🚀 Updated portfolio design system</div>
-            <div className="text-sm text-white/80">✨ Added 3D animations to hero section</div>
-            <div className="text-sm text-white/80">🔧 Optimized build performance</div>
+            <div className="text-sm text-white/80">🚀 Planned new physiotherapy related application</div>
+            <div className="text-sm text-white/80">✨ Updated portfolio</div>
+            <div className="text-sm text-white/80">🔧 Sprint planning Resume matching AI project</div>
           </div>
         </div>
       </CardContent>

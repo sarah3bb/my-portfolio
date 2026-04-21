@@ -6,10 +6,10 @@ import { Progress } from "@/components/ui/progress"
 import { BookOpen, Zap } from "lucide-react"
 
 const learningData = [
-  { name: "WebAssembly", progress: 75, icon: "🔧" },
-  { name: "Rust", progress: 60, icon: "🦀" },
-  { name: "Machine Learning", progress: 45, icon: "🤖" },
-  { name: "Blockchain", progress: 30, icon: "⛓️" },
+  { name: "AWS Certificate", progress: 55, icon: "🔧" },
+  { name: "AI", progress: 40, icon: "🤖" },
+  // { name: "Machine Learning", progress: 45, icon:  },
+  // { name: "Blockchain", progress: 30, icon: "⛓️" },
 ]
 
 export default function CurrentlyLearningWidget() {

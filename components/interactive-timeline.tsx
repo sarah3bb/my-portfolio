@@ -9,35 +9,64 @@ import { Calendar, MapPin, Briefcase } from "lucide-react"
 const timelineData = [
   {
     id: 1,
-    year: "2024",
-    title: "Senior Full-Stack Developer",
-    company: "TechCorp Inc.",
-    location: "San Francisco, CA",
-    description: "Leading development of next-generation web applications using cutting-edge technologies.",
-    technologies: ["React", "Node.js", "TypeScript", "AWS"],
-    achievements: ["Increased performance by 40%", "Led team of 8 developers", "Architected microservices"],
+    year: "2026",
+    title: "DevOps Intern",
+    company: "Marksales Software",
+    location: "Sydney, Australia",
+    description:
+      "Worked on cloud observability and automation for a SaaS CRM platform, improving system reliability and operational efficiency.",
+    technologies: ["AWS", "CloudWatch", "Python", "DevOps"],
+    achievements: [
+      "Monitored cloud systems using AWS CloudWatch",
+      "Automated workflows like dependency installation and database backups",
+      "Reduced manual operational effort through scripting",
+    ],
   },
   {
     id: 2,
-    year: "2022",
-    title: "Creative Technologist",
-    company: "Digital Agency",
-    location: "New York, NY",
-    description: "Bridged design and development to create immersive digital experiences.",
-    technologies: ["Three.js", "WebGL", "React", "Python"],
-    achievements: ["Won 3 design awards", "Created viral AR campaign", "Mentored junior developers"],
+    year: "2025",
+    title: "Operations & Systems Engineer",
+    company: "IBT Sydney",
+    location: "Sydney, Australia",
+    description:
+      "Improved operational systems and onboarding processes for a fast-growing tutoring startup.",
+    technologies: ["Airtable", "Squarespace", "Data Analysis"],
+    achievements: [
+      "Reduced onboarding time by 45% (14 days → ~7–8 days)",
+      "Analyzed operational data to track performance improvements",
+      "Coached and coordinated 17 tutors to improve outcomes",
+    ],
   },
   {
     id: 3,
-    year: "2020",
-    title: "Frontend Developer",
-    company: "StartupXYZ",
-    location: "Austin, TX",
-    description: "Built responsive web applications and mobile-first experiences.",
-    technologies: ["Vue.js", "JavaScript", "CSS3", "Firebase"],
-    achievements: ["Launched 5 products", "Improved UX metrics by 60%", "Built design system"],
+    year: "2025",
+    title: "Software Development & QA Intern",
+    company: "DQAC (King Saud University)",
+    location: "Riyadh, Saudi Arabia",
+    description:
+      "Improved system reliability and contributed to a patent-related project through QA and debugging.",
+    technologies: ["QA", "Debugging", "Software Testing"],
+    achievements: [
+      "Identified and resolved 9+ system defects",
+      "Improved certification workflow reliability",
+    ],
+  },
+  {
+    id: 4,
+    year: "2024",
+    title: "Software Development & QA Intern",
+    company: "Cyber to Cyber (King Saud University)",
+    location: "Riyadh, Saudi Arabia",
+    description:
+      "Contributed to system design improvements and led QA efforts for a cybersecurity platform.",
+    technologies: ["QA", "System Design", "Cybersecurity"],
+    achievements: [
+      "Proposed 13+ system features for scalability and growth",
+      "Documented 30+ bugs across authentication, payments, and data validation",
+    ],
   },
 ]
+
 
 export default function InteractiveTimeline() {
   const [selectedItem, setSelectedItem] = useState<number | null>(null)

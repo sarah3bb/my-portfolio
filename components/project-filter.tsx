@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button"
 
 const filters = [
   { id: "all", label: "All Projects", icon: "🌌" },
-  { id: "frontend", label: "Frontend", icon: "🎨" },
+  { id: "fullstack", label: "Full-Stack", icon: "🧩" },
+  { id: "cloud", label: "Cloud", icon: "☁️" },
+  { id: "ml", label: "AI / ML", icon: "🤖" },
   { id: "backend", label: "Backend", icon: "⚙️" },
-  { id: "ai", label: "AI/ML", icon: "🤖" },
-  { id: "opensource", label: "Open Source", icon: "🔓" },
 ]
 
 interface ProjectFilterProps {

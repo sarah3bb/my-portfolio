@@ -64,7 +64,7 @@ export default function HeroSection() {
             transition={{ delay: 0.8, duration: 1 }}
             className="text-6xl md:text-8xl font-bold mb-6 liquid-gradient font-sora"
           >
-            John Doe
+            Sarah Abbas
           </motion.h1>
 
           {/* Subheading */}
@@ -84,19 +84,22 @@ export default function HeroSection() {
             transition={{ delay: 1.2, duration: 0.8 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <Button
+            {/* <Button
               size="lg"
               className="glass-morphism hover:animate-glow text-white border-cyan-400 hover:border-cyan-300 px-8 py-4 text-lg bg-transparent"
               variant="outline"
             >
-              <Rocket className="mr-2 h-5 w-5" />🚀 Explore My Universe
-            </Button>
+              <Rocket className="mr-2 h-5 w-5" />🚀 Explore My Projects
+            </Button> */}
             <Button
               size="lg"
               className="glass-morphism hover:animate-glow text-white border-purple-400 hover:border-purple-300 px-8 py-4 text-lg bg-transparent"
               variant="outline"
+              asChild
             >
+              <a href="/Sarah Abbas Software Developer Resume 1.0.1.pdf" download>
               <Download className="mr-2 h-5 w-5" />📄 Download Resume
+              </a>
             </Button>
           </motion.div>
         </motion.div>
