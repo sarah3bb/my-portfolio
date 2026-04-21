@@ -9,12 +9,12 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const sora = Sora({ subsets: ["latin"], variable: "--font-sora" })
 
 export const metadata: Metadata = {
-  title: "John Doe - Creative Technologist",
+  title: "Sarah Abbas - Software Developer",
   description: "Inventing tomorrow's web, one line of code at a time.",
   keywords: ["developer", "portfolio", "full-stack", "creative technologist"],
-  authors: [{ name: "John Doe" }],
+  authors: [{ name: "Sarah Abbas" }],
   openGraph: {
-    title: "John Doe - Creative Technologist",
+    title: "Sarah Abbas - Software Developer",
     description: "Inventing tomorrow's web, one line of code at a time.",
     type: "website",
   },

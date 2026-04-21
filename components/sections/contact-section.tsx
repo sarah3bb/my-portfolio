@@ -9,30 +9,137 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { Mail, Phone, MapPin, Send, Mic, MicOff } from "lucide-react"
+import { Mail, Phone, MapPin, Send, Mic, MicOff, CalendarDays } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
 export default function ContactSection() {
   const [isRecording, setIsRecording] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isMeetingSubmitting, setIsMeetingSubmitting] = useState(false)
+  const [showMeetingForm, setShowMeetingForm] = useState(false)
+  const [aiResponse, setAiResponse] = useState("")
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   })
+
+  const [meetingData, setMeetingData] = useState({
+    name: "",
+    email: "",
+    date: "",
+    time: "",
+    notes: "",
+  })
+
   const { toast } = useToast()
+
+  const socials = [
+    {
+      name: "GitHub",
+      icon: "🐙",
+      color: "hover:text-gray-400",
+      href: "https://github.com/sabb7296",
+    },
+    {
+      name: "LinkedIn",
+      icon: "💼",
+      color: "hover:text-blue-400",
+      href: "https://www.linkedin.com/in/sarah-abbas-b79907256",
+    },
+  ]
+
+  const aiAnswers = {
+  experience:
+    "Sarah is a software developer with around 5 years of experience across startups and research-focused environments. She has worked in software engineering, DevOps, and systems operations roles, with experience improving workflows, automating processes, and supporting scalable cloud-based systems.",
+
+  technologies:
+    "Sarah works across full-stack and cloud technologies including React, TypeScript, Node.js, Python, AWS, Express, MongoDB, and serverless tools like Lambda and S3. She is also currently experimenting with Figma and Claude to explore design workflows and AI-assisted product development.",
+
+  // projects:
+  //   "Sarah has worked on projects including an AWS-based image captioning web app, a full-stack e-commerce platform, machine learning prediction models, and QA and systems improvement work across startup and research environments.",
+}
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsSubmitting(true)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
 
-    toast({
-      title: "Message sent! 🚀",
-      description: "Thanks for reaching out. I'll get back to you soon!",
-    })
+      const data = await response.json()
 
-    setFormData({ name: "", email: "", message: "" })
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message")
+      }
+
+      toast({
+        title: "Message sent! 🚀",
+        description: "Thanks for reaching out. I'll get back to you soon!",
+      })
+
+      setFormData({ name: "", email: "", message: "" })
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        description:
+          error instanceof Error ? error.message : "Your message could not be sent.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleMeetingRequest = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsMeetingSubmitting(true)
+
+    try {
+      const response = await fetch("/api/meeting-request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(meetingData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send meeting request")
+      }
+
+      toast({
+        title: "Meeting request sent 📅",
+        description: "Thanks! Sarah will review your preferred time and get back to you soon.",
+      })
+
+      setMeetingData({
+        name: "",
+        email: "",
+        date: "",
+        time: "",
+        notes: "",
+      })
+      setShowMeetingForm(false)
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        description:
+          error instanceof Error ? error.message : "Your meeting request could not be sent.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsMeetingSubmitting(false)
+    }
   }
 
   const toggleRecording = () => {
@@ -54,14 +161,15 @@ export default function ContactSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 liquid-gradient font-sora">Let's Connect</h2>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 liquid-gradient font-sora">
+            Let's Connect
+          </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
             Ready to bring your ideas to life? Let's discuss how we can create something amazing together.
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -69,7 +177,9 @@ export default function ContactSection() {
           >
             <Card className="glass-morphism border-white/20">
               <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">💬 Send a Message</CardTitle>
+                <CardTitle className="text-white flex items-center gap-2">
+                  💬 Send a Message
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -118,28 +228,29 @@ export default function ContactSection() {
 
                   <Button
                     type="submit"
+                    disabled={isSubmitting}
                     className="w-full glass-morphism border-cyan-400 text-cyan-400 hover:bg-cyan-400/20 hover:animate-glow"
                     size="lg"
                   >
                     <Send className="mr-2 h-5 w-5" />
-                    Send Message
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </CardContent>
             </Card>
           </motion.div>
 
-          {/* Contact Info & AI Assistant */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
             className="space-y-6"
           >
-            {/* Contact Information */}
             <Card className="glass-morphism border-white/20">
               <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">📞 Get in Touch</CardTitle>
+                <CardTitle className="text-white flex items-center gap-2">
+                  📞 Get in Touch
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-3">
@@ -159,10 +270,11 @@ export default function ContactSection() {
               </CardContent>
             </Card>
 
-            {/* AI Assistant */}
             <Card className="glass-morphism border-white/20">
               <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">🤖 AI Assistant</CardTitle>
+                <CardTitle className="text-white flex items-center gap-2">
+                  🤖 AI Assistant
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -172,43 +284,143 @@ export default function ContactSection() {
                     </div>
                     <div className="flex-1">
                       <p className="text-white/80 text-sm">
-                        Hi! I'm John's AI assistant. I can help answer questions about his experience, schedule
+                        Hi! I'm Sarah's AI assistant. I can help answer questions about her experience, schedule
                         meetings, or provide project details. What would you like to know?
                       </p>
                     </div>
                   </div>
 
                   <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary" className="bg-white/10 text-white cursor-pointer hover:bg-white/20">
-                      Tell me about John's experience
+                    <Badge
+                      variant="secondary"
+                      className="bg-white/10 text-white cursor-pointer hover:bg-white/20"
+                      onClick={() => {
+                        setAiResponse(aiAnswers.experience)
+                        setShowMeetingForm(false)
+                      }}
+                    >
+                      Tell me about Sarah's experience
                     </Badge>
-                    <Badge variant="secondary" className="bg-white/10 text-white cursor-pointer hover:bg-white/20">
-                      What technologies does he use?
+
+                    <Badge
+                      variant="secondary"
+                      className="bg-white/10 text-white cursor-pointer hover:bg-white/20"
+                      onClick={() => {
+                        setAiResponse(aiAnswers.technologies)
+                        setShowMeetingForm(false)
+                      }}
+                    >
+                      What technologies does she use?
                     </Badge>
-                    <Badge variant="secondary" className="bg-white/10 text-white cursor-pointer hover:bg-white/20">
+
+                    <Badge
+                      variant="secondary"
+                      className="bg-white/10 text-white cursor-pointer hover:bg-white/20"
+                      onClick={() => {
+                        setAiResponse("")
+                        setShowMeetingForm((prev) => !prev)
+                      }}
+                    >
                       Schedule a meeting
                     </Badge>
                   </div>
+
+                  {aiResponse && (
+                    <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400 flex items-center justify-center text-sm">
+                          AI
+                        </div>
+                        <p className="text-white/80 text-sm leading-relaxed">{aiResponse}</p>
+                      </div>
+                    </div>
+                  )}
+                  {showMeetingForm && (
+                    <div className="mt-6 rounded-xl border border-white/10 bg-white/5 p-4">
+                      <div className="flex items-center gap-2 mb-4">
+                        <CalendarDays className="h-5 w-5 text-cyan-400" />
+                        <h3 className="text-white font-semibold">Request a Meeting</h3>
+                      </div>
+
+                      <form onSubmit={handleMeetingRequest} className="space-y-4">
+                        <Input
+                          placeholder="Your Name"
+                          value={meetingData.name}
+                          onChange={(e) =>
+                            setMeetingData({ ...meetingData, name: e.target.value })
+                          }
+                          className="glass-morphism border-white/20 text-white placeholder:text-white/50"
+                          required
+                        />
+
+                        <Input
+                          type="email"
+                          placeholder="Your Email"
+                          value={meetingData.email}
+                          onChange={(e) =>
+                            setMeetingData({ ...meetingData, email: e.target.value })
+                          }
+                          className="glass-morphism border-white/20 text-white placeholder:text-white/50"
+                          required
+                        />
+
+                        <Input
+                          type="date"
+                          value={meetingData.date}
+                          onChange={(e) =>
+                            setMeetingData({ ...meetingData, date: e.target.value })
+                          }
+                          className="glass-morphism border-white/20 text-white"
+                          required
+                        />
+
+                        <Input
+                          type="time"
+                          value={meetingData.time}
+                          onChange={(e) =>
+                            setMeetingData({ ...meetingData, time: e.target.value })
+                          }
+                          className="glass-morphism border-white/20 text-white"
+                          required
+                        />
+
+                        <Textarea
+                          placeholder="What would you like to discuss?"
+                          value={meetingData.notes}
+                          onChange={(e) =>
+                            setMeetingData({ ...meetingData, notes: e.target.value })
+                          }
+                          className="glass-morphism border-white/20 text-white placeholder:text-white/50 min-h-24"
+                        />
+
+                        <Button
+                          type="submit"
+                          disabled={isMeetingSubmitting}
+                          className="w-full glass-morphism border-cyan-400 text-cyan-400 hover:bg-cyan-400/20"
+                        >
+                          {isMeetingSubmitting ? "Sending Request..." : "Request to Schedule"}
+                        </Button>
+                      </form>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
 
-            {/* Social Links */}
             <Card className="glass-morphism border-white/20">
               <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">🌐 Connect Online</CardTitle>
+                <CardTitle className="text-white flex items-center gap-2">
+                  🌐 Connect Online
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { name: "GitHub", icon: "🐙", color: "hover:text-gray-400" },
-                    { name: "LinkedIn", icon: "💼", color: "hover:text-blue-400" },
-                    { name: "Twitter", icon: "🐦", color: "hover:text-cyan-400" },
-                    { name: "Discord", icon: "🎮", color: "hover:text-purple-400" },
-                  ].map((social) => (
+                  {socials.map((social) => (
                     <motion.a
                       key={social.name}
-                      href="#"
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className={`flex items-center gap-2 p-3 rounded-lg glass-morphism border border-white/10 text-white/80 transition-colors ${social.color}`}
@@ -223,7 +435,6 @@ export default function ContactSection() {
           </motion.div>
         </div>
 
-        {/* Footer */}
         <motion.footer
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
