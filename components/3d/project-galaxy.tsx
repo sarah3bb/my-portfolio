@@ -20,8 +20,8 @@ const projectsData = [
       "Cloud-based image upload platform that generates thumbnails and AI captions using an event-driven AWS architecture.",
     technologies: ["AWS S3", "AWS Lambda", "EC2", "Flask", "Google Gemini API"],
     github: "https://github.com/yourusername/aws-image-captioning-app",
-    demo: "",
-    image: "/placeholder.svg?height=200&width=300",
+    // demo: "",
+    // image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: 2,
@@ -33,8 +33,8 @@ const projectsData = [
       "Full-stack e-commerce app with authentication, product listings, and transaction workflows built in a team environment.",
     technologies: ["React", "TypeScript", "Express", "MongoDB", "REST APIs"],
     github: "https://github.com/yourusername/oldphonedeals",
-    demo: "",
-    image: "/placeholder.svg?height=200&width=300",
+    // demo: "",
+    // image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: 3,
@@ -46,8 +46,6 @@ const projectsData = [
       "Machine learning capstone project predicting entry into the Stanford Top 2% Scientists list using regression models and cross-validation.",
     technologies: ["Python", "pandas", "scikit-learn", "RMSE", "Cross Validation"],
     github: "https://github.com/yourusername/researcher-prediction-model",
-    demo: "",
-    image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: 4,
@@ -59,8 +57,8 @@ const projectsData = [
       "Java team project built across three sprints with backend features, persistent data handling, and CI/CD automation using Jenkins.",
     technologies: ["Java", "Jenkins", "GitHub", "CI/CD", "Agile", "Scrum"],
     github: "https://github.com/yourusername/agile-java-app",
-    demo: "",
-    image: "/placeholder.svg?height=200&width=300",
+    // demo: "",
+    // image: "/placeholder.svg?height=200&width=300",
   },
 ]
 
